@@ -1,10 +1,13 @@
 import { Container, ContainerModule, interfaces } from "inversify";
 import App from "./app";
+import ILoggerService from "./logger/logger.interface";
+import LoggerService from "./logger/logger.service";
 import { TYPES } from "./types"
 
 
 const bindings = new ContainerModule((bind: interfaces.Bind) => {
     bind<App>(TYPES.Application).to(App);
+    bind<ILoggerService>(TYPES.ILoggerService).to(LoggerService);
 });
 
 function bootstrap() {
