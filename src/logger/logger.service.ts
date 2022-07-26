@@ -14,6 +14,7 @@ export default class LoggerService implements ILoggerService {
             displayFilePath: 'hidden',
             displayFunctionName: false
         })
+        this.log('LoggerService was instantiated');
     }
 
     public log(...args: unknown[]) {
