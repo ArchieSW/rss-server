@@ -13,7 +13,7 @@ export default class App {
     private _server: Server;
     private readonly _port: number;
 
-    public get port() : number {
+    public get port(): number {
         return this._port;
     }
 
@@ -27,15 +27,15 @@ export default class App {
         this._port = 8000;
     }
 
-    public useRoutes() {
-        this._app.use('/users', this.userController.router)
+    public useRoutes(): void {
+        this._app.use('/users', this.userController.router);
     }
 
-    public useExceptionFilter() {
+    public useExceptionFilter(): void {
         this._app.use(this.exceptionFilter.catch.bind(this.exceptionFilter));
     }
 
-    public init() {
+    public init(): void {
         this.useRoutes();
         this.useExceptionFilter();
         this._server = this._app.listen(this.port);
