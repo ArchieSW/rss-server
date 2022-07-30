@@ -17,11 +17,11 @@ export default class UsersController extends BaseController implements IUsersCon
         ]);
     }
 
-    public login(req: Request, res: Response, next: NextFunction) {
+    public login(req: Request, res: Response, next: NextFunction): void {
         next(new HttpError(501, 'This feature is not implemented yet', 'UsersController'));
     }
 
-    public register(req: Request, res: Response, next: NextFunction) {
+    public register(req: Request, res: Response, next: NextFunction): void {
         next(new HttpError(501, 'This feature is not implemented yet', 'UsersController'));
     }
 }

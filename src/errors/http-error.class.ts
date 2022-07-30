@@ -3,13 +3,13 @@ export default class HttpError extends Error {
     private _message: string;
     private _context?: string;
 
-    public get statusCode() {
+    public get statusCode(): number {
         return this._statusCode;
     }
-    public get message() {
+    public get message(): string {
         return this._message;
     }
-    public get context() {
+    public get context(): string | undefined {
         return this._context;
     }
 

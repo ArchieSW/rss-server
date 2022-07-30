@@ -17,15 +17,15 @@ export default class LoggerService implements ILoggerService {
         this.log('LoggerService was instantiated');
     }
 
-    public log(...args: unknown[]) {
+    public log(...args: unknown[]): void {
         this.logger.info(...args);
     }
 
-    public warn(...args: unknown[]) {
+    public warn(...args: unknown[]): void {
         this.logger.warn(...args);
     }
 
-    public error(...args: unknown[]) {
+    public error(...args: unknown[]): void {
         this.logger.error(...args);
     }
 }

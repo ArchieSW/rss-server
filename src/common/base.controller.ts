@@ -8,7 +8,7 @@ import IControllerRoute from './route.interface';
 export default abstract class BaseController {
     private readonly _router: Router;
 
-    public get router() {
+    public get router(): Router {
         return this._router;
     }
 
@@ -16,7 +16,7 @@ export default abstract class BaseController {
         this._router = Router();
     }
 
-    protected bindRoutes(routes: IControllerRoute[]) {
+    protected bindRoutes(routes: IControllerRoute[]): void {
         for (const route of routes) {
             this.logger.log(`[${route.method}] ${route.path}`);
             const handler = route.func.bind(this);

@@ -27,15 +27,15 @@ export default class App {
         this._port = 8000;
     }
 
-    public useRoutes() {
+    public useRoutes(): void {
         this._app.use('/users', this.userController.router);
     }
 
-    public useExceptionFilter() {
+    public useExceptionFilter(): void {
         this._app.use(this.exceptionFilter.catch.bind(this.exceptionFilter));
     }
 
-    public init() {
+    public init(): void {
         this.useRoutes();
         this.useExceptionFilter();
         this._server = this._app.listen(this.port);
