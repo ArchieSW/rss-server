@@ -28,7 +28,7 @@ export default class App {
     }
 
     public useRoutes() {
-        this._app.use('/users', this.userController.router)
+        this._app.use('/users', this.userController.router);
     }
 
     public useExceptionFilter() {
