@@ -1,12 +1,11 @@
-import { Container, ContainerModule, interfaces } from "inversify";
-import App from "./app";
-import ExceptionFilter from "./errors/exception.filter";
-import IExceptionFilter from "./errors/exception.filter.interface";
-import ILoggerService from "./logger/logger.interface";
-import LoggerService from "./logger/logger.service";
-import { TYPES } from "./types"
-import UsersController from "./users/users.controller";
-
+import { Container, ContainerModule, interfaces } from 'inversify';
+import App from './app';
+import ExceptionFilter from './errors/exception.filter';
+import IExceptionFilter from './errors/exception.filter.interface';
+import ILoggerService from './logger/logger.interface';
+import LoggerService from './logger/logger.service';
+import { TYPES } from './types';
+import UsersController from './users/users.controller';
 
 const bindings = new ContainerModule((bind: interfaces.Bind) => {
     bind<App>(TYPES.Application).to(App).inSingletonScope();

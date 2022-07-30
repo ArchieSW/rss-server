@@ -13,7 +13,7 @@ export default class App {
     private _server: Server;
     private readonly _port: number;
 
-    public get port() : number {
+    public get port(): number {
         return this._port;
     }
 
