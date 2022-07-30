@@ -4,6 +4,7 @@ import ILoggerService from '../logger/logger.interface'
 import IUsersController from './users.controller.interface'
 import { Request, Response, NextFunction } from 'express'
 import BaseController from '../common/base.controller'
+import HttpError from '../errors/http-error.class'
 
 @injectable()
 export default class UsersController extends BaseController implements IUsersController{
@@ -19,11 +20,11 @@ export default class UsersController extends BaseController implements IUsersCon
     }
 
     public login(req: Request, res: Response, next: NextFunction) {
-        res.sendStatus(501);
+        next(new HttpError(501, 'This feature is not implemented yet', 'UsersController'));
     }
 
     public register(req: Request, res: Response, next: NextFunction) {
-        res.sendStatus(501);
+        next(new HttpError(501, 'This feature is not implemented yet', 'UsersController'));
     }
 
 }
