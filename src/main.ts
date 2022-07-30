@@ -9,10 +9,10 @@ import UsersController from "./users/users.controller";
 
 
 const bindings = new ContainerModule((bind: interfaces.Bind) => {
-    bind<App>(TYPES.Application).to(App);
-    bind<ILoggerService>(TYPES.ILoggerService).to(LoggerService);
-    bind<UsersController>(TYPES.UsersController).to(UsersController);
-    bind<IExceptionFilter>(TYPES.IExceptionFilter).to(ExceptionFilter);
+    bind<App>(TYPES.Application).to(App).inSingletonScope();
+    bind<ILoggerService>(TYPES.ILoggerService).to(LoggerService).inSingletonScope();
+    bind<UsersController>(TYPES.UsersController).to(UsersController).inSingletonScope();
+    bind<IExceptionFilter>(TYPES.IExceptionFilter).to(ExceptionFilter).inSingletonScope();
 });
 
 function bootstrap() {
