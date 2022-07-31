@@ -7,6 +7,7 @@ import { TYPES } from './types';
 import UsersController from './users/users.controller';
 import ExceptionFilter from './errors/exception.filter';
 import { json } from 'body-parser';
+import IDbService from './database/db.service.interface';
 
 @injectable()
 export default class App {
@@ -22,6 +23,7 @@ export default class App {
         @inject(TYPES.ILoggerService) private logger: ILoggerService,
         @inject(TYPES.UsersController) private userController: UsersController,
         @inject(TYPES.IExceptionFilter) private exceptionFilter: ExceptionFilter,
+        @inject(TYPES.IDbService) private prismaService: IDbService,
     ) {
         this.logger.log('App was instantiated');
         this._app = express();
@@ -40,10 +42,11 @@ export default class App {
         this._app.use(this.exceptionFilter.catch.bind(this.exceptionFilter));
     }
 
-    public init(): void {
+    public async init(): Promise<void> {
         this.useMiddlewares();
         this.useRoutes();
         this.useExceptionFilter();
+        await this.prismaService.connect();
         this._server = this._app.listen(this.port);
         this.logger.log(`Server start at: http://localhost:${this.port}`);
     }
