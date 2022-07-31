@@ -5,6 +5,8 @@ import IUsersController from './users.controller.interface';
 import { Request, Response, NextFunction } from 'express';
 import BaseController from '../common/base.controller';
 import HttpError from '../errors/http-error.class';
+import UserLoginDto from './dto/user-login.dto';
+import UserRegisterDto from './dto/user-register.dto';
 
 @injectable()
 export default class UsersController extends BaseController implements IUsersController {
@@ -17,11 +19,15 @@ export default class UsersController extends BaseController implements IUsersCon
         ]);
     }
 
-    public login(req: Request, res: Response, next: NextFunction): void {
+    public login(req: Request<{}, {}, UserLoginDto>, res: Response, next: NextFunction): void {
         next(new HttpError(501, 'This feature is not implemented yet', 'UsersController'));
     }
 
-    public register(req: Request, res: Response, next: NextFunction): void {
+    public register(
+        req: Request<{}, {}, UserRegisterDto>,
+        res: Response,
+        next: NextFunction,
+    ): void {
         next(new HttpError(501, 'This feature is not implemented yet', 'UsersController'));
     }
 }
