@@ -4,6 +4,7 @@ Is a server for rss agregator
 ## Start using:
 ```bash
 npm install
+npm run generate
 npm run build
 npm run start
 ```
