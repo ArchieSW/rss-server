@@ -6,6 +6,7 @@ import ILoggerService from './logger/logger.interface';
 import { TYPES } from './types';
 import UsersController from './users/users.controller';
 import ExceptionFilter from './errors/exception.filter';
+import { json } from 'body-parser';
 
 @injectable()
 export default class App {
@@ -27,6 +28,10 @@ export default class App {
         this._port = 8000;
     }
 
+    public useMiddlewares(): void {
+        this._app.use(json());
+    }
+
     public useRoutes(): void {
         this._app.use('/users', this.userController.router);
     }
@@ -36,6 +41,7 @@ export default class App {
     }
 
     public init(): void {
+        this.useMiddlewares();
         this.useRoutes();
         this.useExceptionFilter();
         this._server = this._app.listen(this.port);
