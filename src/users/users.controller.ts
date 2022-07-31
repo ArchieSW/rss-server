@@ -7,6 +7,7 @@ import BaseController from '../common/base.controller';
 import HttpError from '../errors/http-error.class';
 import UserLoginDto from './dto/user-login.dto';
 import UserRegisterDto from './dto/user-register.dto';
+import ValidateMiddleware from '../validator/validator.middleware';
 
 @injectable()
 export default class UsersController extends BaseController implements IUsersController {
@@ -14,8 +15,18 @@ export default class UsersController extends BaseController implements IUsersCon
         super(loggerService);
         this.loggerService.log(`UsersController was instantiated`);
         this.bindRoutes([
-            { path: '/register', method: 'post', func: this.register },
-            { path: '/login', method: 'post', func: this.login },
+            { 
+                path: '/register',
+                method: 'post',
+                func: this.register,
+                middlewares: [new ValidateMiddleware(UserRegisterDto)],
+            },
+            { 
+                path: '/login',
+                method: 'post',
+                func: this.login,
+                middlewares: [new ValidateMiddleware(UserLoginDto)],
+            },
         ]);
     }
 
