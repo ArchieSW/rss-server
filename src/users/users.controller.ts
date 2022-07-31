@@ -20,7 +20,6 @@ export default class UsersController extends BaseController implements IUsersCon
     }
 
     public login(req: Request<{}, {}, UserLoginDto>, res: Response, next: NextFunction): void {
-        this.loggerService.log(req.body);
         next(new HttpError(501, 'This feature is not implemented yet', 'UsersController'));
     }
 
@@ -29,7 +28,6 @@ export default class UsersController extends BaseController implements IUsersCon
         res: Response,
         next: NextFunction,
     ): void {
-        this.loggerService.log(req.body);
         next(new HttpError(501, 'This feature is not implemented yet', 'UsersController'));
     }
 }
