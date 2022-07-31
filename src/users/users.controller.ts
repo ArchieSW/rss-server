@@ -15,13 +15,13 @@ export default class UsersController extends BaseController implements IUsersCon
         super(loggerService);
         this.loggerService.log(`UsersController was instantiated`);
         this.bindRoutes([
-            { 
+            {
                 path: '/register',
                 method: 'post',
                 func: this.register,
                 middlewares: [new ValidateMiddleware(UserRegisterDto)],
             },
-            { 
+            {
                 path: '/login',
                 method: 'post',
                 func: this.login,
