@@ -1,8 +1,8 @@
 import { hash } from 'bcryptjs';
 
 export default class User {
-    private _name: string;
-    private _email: string;
+    private readonly _name: string;
+    private readonly _email: string;
     private _password: string;
 
     public get name(): string {

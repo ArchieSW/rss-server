@@ -7,3 +7,5 @@ export default interface IControllerRoute {
     method: keyof Pick<Router, 'get' | 'post' | 'patch' | 'delete' | 'put'>;
     middlewares?: IMiddleware[];
 }
+
+export type ExpressReturnType = Response<any, Record<string, any>>;
