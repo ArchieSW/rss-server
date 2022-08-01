@@ -24,7 +24,7 @@ const bindings = new ContainerModule((bind: interfaces.Bind) => {
     bind<IExceptionFilter>(TYPES.IExceptionFilter).to(ExceptionFilter).inSingletonScope();
     bind<IUserService>(TYPES.IUserService).to(UserService).inSingletonScope();
     bind<IConfigService>(TYPES.IConfigService).to(ConfigService).inSingletonScope();
-    bind<PrismaService>(TYPES.PrismaService).to(PrismaService).inRequestScope();
+    bind<PrismaService>(TYPES.PrismaService).to(PrismaService).inSingletonScope();
 });
 
 function bootstrap(): IBootstrapReturn {
