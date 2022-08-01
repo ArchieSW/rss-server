@@ -5,7 +5,7 @@ import { TYPES } from '../types';
 import UserLoginDto from './dto/user-login.dto';
 import UserRegisterDto from './dto/user-register.dto';
 import User from './user.entity';
-import IUserService from './user.service.interface';
+import IUserService from './users.service.interface';
 
 @injectable()
 export default class UserService implements IUserService {
