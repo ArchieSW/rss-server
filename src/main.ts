@@ -2,15 +2,14 @@ import { Container, ContainerModule, interfaces } from 'inversify';
 import App from './app';
 import ConfigService from './config/config.service';
 import IConfigService from './config/config.service.interface';
-import IDbService from './database/db.service.interface';
 import PrismaService from './database/prisma.service';
 import ExceptionFilter from './errors/exception.filter';
 import IExceptionFilter from './errors/exception.filter.interface';
 import ILoggerService from './logger/logger.interface';
 import LoggerService from './logger/logger.service';
 import { TYPES } from './types';
-import UserService from './users/user.service';
-import IUserService from './users/user.service.interface';
+import UserService from './users/users.service';
+import IUserService from './users/users.service.interface';
 import UsersController from './users/users.controller';
 
 interface IBootstrapReturn {
@@ -25,7 +24,7 @@ const bindings = new ContainerModule((bind: interfaces.Bind) => {
     bind<IExceptionFilter>(TYPES.IExceptionFilter).to(ExceptionFilter).inSingletonScope();
     bind<IUserService>(TYPES.IUserService).to(UserService).inSingletonScope();
     bind<IConfigService>(TYPES.IConfigService).to(ConfigService).inSingletonScope();
-    bind<IDbService>(TYPES.IDbService).to(PrismaService).inRequestScope();
+    bind<PrismaService>(TYPES.PrismaService).to(PrismaService).inRequestScope();
 });
 
 function bootstrap(): IBootstrapReturn {

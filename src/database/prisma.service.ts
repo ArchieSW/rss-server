@@ -2,11 +2,14 @@ import { PrismaClient } from '@prisma/client';
 import { inject, injectable } from 'inversify';
 import ILoggerService from '../logger/logger.interface';
 import { TYPES } from '../types';
-import IDbService from './db.service.interface';
 
 @injectable()
-export default class PrismaService implements IDbService {
+export default class PrismaService {
     private prisma: PrismaClient;
+
+    public get client(): PrismaClient {
+        return this.prisma;
+    }
 
     constructor(@inject(TYPES.ILoggerService) private logger: ILoggerService) {
         this.logger.log('PrismaService was instantiated');
