@@ -9,6 +9,8 @@ import UserLoginDto from './dto/user-login.dto';
 import UserRegisterDto from './dto/user-register.dto';
 import ValidateMiddleware from '../validator/validator.middleware';
 import IUserService from './users.service.interface';
+import { sign } from 'jsonwebtoken';
+import { promisify } from 'util';
 
 @injectable()
 export default class UsersController extends BaseController implements IUsersController {
@@ -43,7 +45,9 @@ export default class UsersController extends BaseController implements IUsersCon
         if (!userExists) {
             return next(new HttpError(401, 'Authorization failed', 'UsersController'));
         }
-        this.ok(res, {});
+        const userEmail = req.body.email;
+        const jwt = await this.userService.signJWT(userEmail);
+        this.ok(res, { jwt });
     }
 
     public async register(
