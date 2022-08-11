@@ -34,8 +34,16 @@ export default class UsersController extends BaseController implements IUsersCon
         ]);
     }
 
-    public login(req: Request<{}, {}, UserLoginDto>, res: Response, next: NextFunction): void {
-        next(new HttpError(501, 'This feature is not implemented yet', 'UsersController'));
+    public async login(
+        req: Request<{}, {}, UserLoginDto>,
+        res: Response,
+        next: NextFunction,
+    ): Promise<void> {
+        const userExists = await this.userService.validateUser(req.body);
+        if (!userExists) {
+            return next(new HttpError(401, 'Authorization failed', 'UsersController'));
+        }
+        this.ok(res, {});
     }
 
     public async register(
