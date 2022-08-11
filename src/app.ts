@@ -8,6 +8,8 @@ import UsersController from './users/users.controller';
 import ExceptionFilter from './errors/exception.filter';
 import { json } from 'body-parser';
 import PrismaService from './database/prisma.service';
+import AuthMiddleware from './common/auth.middleware';
+import ConfigService from './config/config.service';
 
 @injectable()
 export default class App {
@@ -24,6 +26,7 @@ export default class App {
         @inject(TYPES.UsersController) private userController: UsersController,
         @inject(TYPES.IExceptionFilter) private exceptionFilter: ExceptionFilter,
         @inject(TYPES.PrismaService) private prismaService: PrismaService,
+        @inject(TYPES.IConfigService) private configService: ConfigService,
     ) {
         this.logger.log('App was instantiated');
         this._app = express();
@@ -32,6 +35,9 @@ export default class App {
 
     public useMiddlewares(): void {
         this._app.use(json());
+        const secret = this.configService.get('SECRET');
+        const authMiddleware = new AuthMiddleware(secret);
+        this._app.use(authMiddleware.execute.bind(authMiddleware));
     }
 
     public useRoutes(): void {
