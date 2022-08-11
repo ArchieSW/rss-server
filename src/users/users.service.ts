@@ -1,5 +1,6 @@
 import { UserModel } from '@prisma/client';
 import { inject, injectable } from 'inversify';
+import { sign } from 'jsonwebtoken';
 import IConfigService from '../config/config.service.interface';
 import ILoggerService from '../logger/logger.interface';
 import { TYPES } from '../types';
@@ -38,5 +39,22 @@ export default class UserService implements IUserService {
         }
         const user = new User(userExists.name, userExists.email, userExists.password);
         return user.comparePassword(password);
+    }
+
+    public signJWT(email: string): Promise<string> {
+        const secret = this.config.get('SECRET');
+        const payload = { email, iat: Math.floor(Date.now() / 1000) };
+        return new Promise<string>((resolve, reject) => {
+            sign(payload, secret, { algorithm: 'HS256' }, (err, token) => {
+                if (err) {
+                    reject(err);
+                }
+                resolve(token as string);
+            });
+        });
+    }
+
+    public async getUserInfo(email: string): Promise<UserModel | null> {
+        return this.usersRepository.find(email);
     }
 }
