@@ -11,7 +11,7 @@ export default class AuthMiddleware implements IMiddleware {
             verify(token, this.secret, (err, payload) => {
                 let info: any;
                 if (err) {
-                    next();
+                    return next();
                 } else if (typeof payload === 'string') {
                     info = JSON.parse(payload);
                 } else if (payload) {

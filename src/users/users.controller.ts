@@ -11,6 +11,7 @@ import ValidateMiddleware from '../validator/validator.middleware';
 import IUserService from './users.service.interface';
 import { sign } from 'jsonwebtoken';
 import { promisify } from 'util';
+import AuthGuard from '../common/auth.guard';
 
 @injectable()
 export default class UsersController extends BaseController implements IUsersController {
@@ -32,6 +33,12 @@ export default class UsersController extends BaseController implements IUsersCon
                 method: 'post',
                 func: this.login,
                 middlewares: [new ValidateMiddleware(UserLoginDto)],
+            },
+            {
+                path: '/info',
+                method: 'get',
+                func: this.info,
+                middlewares: [new AuthGuard()],
             },
         ]);
     }
@@ -60,5 +67,13 @@ export default class UsersController extends BaseController implements IUsersCon
             return next(new HttpError(422, 'User already exists', 'UsersController'));
         }
         this.ok(res, { email: result.email, id: result.id });
+    }
+
+    public async info(req: Request, res: Response, next: NextFunction): Promise<void> {
+        const userInfo = await this.userService.getUserInfo(req.user);
+        if (!userInfo) {
+            return next(new HttpError(404, 'Not found', 'UsersController'));
+        }
+        this.ok(res, { id: userInfo.id, email: userInfo.email, name: userInfo.name });
     }
 }

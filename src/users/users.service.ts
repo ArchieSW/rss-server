@@ -53,4 +53,8 @@ export default class UserService implements IUserService {
             });
         });
     }
+
+    public async getUserInfo(email: string): Promise<UserModel | null> {
+        return this.usersRepository.find(email);
+    }
 }
