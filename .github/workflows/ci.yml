@@ -14,7 +14,14 @@ jobs:
       - name: Build
         run: |
           npm install
+          npm run generate
           npm run build
-      - name: Test
+      - name: Test with linter
         run: |
           npm run lint
+      - name: Migration
+      - run: |
+          npm run migrate
+      - name: e2e test
+      - run: |
+          npm run test
