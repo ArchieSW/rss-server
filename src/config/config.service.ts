@@ -21,6 +21,10 @@ export default class ConfigService implements IConfigService {
     }
 
     get(key: string): string {
-        return this.config[key];
+        let out = process.env[key];
+        if (!out) {
+            out = this.config[key];
+        }
+        return out;
     }
 }
