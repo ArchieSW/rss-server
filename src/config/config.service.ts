@@ -21,6 +21,6 @@ export default class ConfigService implements IConfigService {
     }
 
     get(key: string): string {
-        return this.config[key];
+        return process.env[key] as string;
     }
 }

@@ -10,6 +10,20 @@ let app: App;
 beforeAll(async () => {
     const bootstrap = await boot;
     app = bootstrap.app;
+
+    const registerDto: UserRegisterDto = {
+        email: 'haha@a.ru',
+        password: '123321',
+        name: 'lol',
+    };
+
+    const regRes = await request(app.app).post('/users/register').send(registerDto);
+    const logRes = await request(app.app).post('/users/login').send(registerDto);
+    const jwt = logRes.body.jwt;
+    const rssRes = await request(app.app)
+        .post('/rss/create')
+        .set('Authorization', `Bearer ${jwt}`)
+        .send({ link: 'https://link.ru' });
 });
 
 describe('/rss tests', () => {
