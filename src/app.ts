@@ -23,6 +23,10 @@ export default class App {
         return this._port;
     }
 
+    public get app(): Express {
+        return this._app;
+    }
+
     constructor(
         @inject(TYPES.ILoggerService) private logger: ILoggerService,
         @inject(TYPES.UsersController) private userController: UsersController,
@@ -59,5 +63,10 @@ export default class App {
         await this.prismaService.connect();
         this._server = this._app.listen(this.port);
         this.logger.log(`Server start at: http://localhost:${this.port}`);
+    }
+
+    public async close(): Promise<void> {
+        this._server.close();
+        await this.prismaService.disconnect();
     }
 }
