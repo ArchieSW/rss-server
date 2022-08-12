@@ -7,7 +7,7 @@ CREATE TABLE "UserModel" (
 );
 
 -- CreateTable
-CREATE TABLE "Rss" (
+CREATE TABLE "RssModel" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "userId" INTEGER NOT NULL,
     "link" TEXT NOT NULL

@@ -10,6 +10,8 @@ import { json } from 'body-parser';
 import PrismaService from './database/prisma.service';
 import AuthMiddleware from './common/auth.middleware';
 import ConfigService from './config/config.service';
+import IRssController from './rss/rss.controller.interface';
+import RssController from './rss/rss.controller';
 
 @injectable()
 export default class App {
@@ -27,6 +29,7 @@ export default class App {
         @inject(TYPES.IExceptionFilter) private exceptionFilter: ExceptionFilter,
         @inject(TYPES.PrismaService) private prismaService: PrismaService,
         @inject(TYPES.IConfigService) private configService: ConfigService,
+        @inject(TYPES.IRssController) private rssController: RssController,
     ) {
         this.logger.log('App was instantiated');
         this._app = express();
@@ -42,6 +45,7 @@ export default class App {
 
     public useRoutes(): void {
         this._app.use('/users', this.userController.router);
+        this._app.use('/rss', this.rssController.router);
     }
 
     public useExceptionFilter(): void {

@@ -9,4 +9,5 @@ export const TYPES = {
     IUsersRepository: Symbol.for('IUsersRepository'),
     IRssRepository: Symbol.for('IRssRepository'),
     IRssService: Symbol.for('IRssService'),
+    IRssController: Symbol.for('IRssController'),
 };

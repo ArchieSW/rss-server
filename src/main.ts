@@ -17,6 +17,8 @@ import IRssRepository from './rss/rss.repository.interface';
 import RssRepository from './rss/rss.repository';
 import IRssService from './rss/rss.service.interface';
 import RssService from './rss/rss.service';
+import IRssController from './rss/rss.controller.interface';
+import RssController from './rss/rss.controller';
 
 interface IBootstrapReturn {
     appContainer: Container;
@@ -34,6 +36,7 @@ const bindings = new ContainerModule((bind: interfaces.Bind) => {
     bind<IUsersRepository>(TYPES.IUsersRepository).to(UsersRepository).inSingletonScope();
     bind<IRssRepository>(TYPES.IRssRepository).to(RssRepository).inSingletonScope();
     bind<IRssService>(TYPES.IRssService).to(RssService).inSingletonScope();
+    bind<IRssController>(TYPES.IRssController).to(RssController).inSingletonScope();
 });
 
 function bootstrap(): IBootstrapReturn {
