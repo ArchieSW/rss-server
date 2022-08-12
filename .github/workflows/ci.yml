@@ -25,6 +25,7 @@ jobs:
           SECRET: ${{ secrets.SECRET }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
+          echo $DATABASE_URL
           npm run migrate
       - name: e2e test
         run: |
