@@ -1,9 +1,9 @@
 import { IsEmail, IsString } from 'class-validator';
 
 export default class UserLoginDto {
-    @IsEmail({}, { message: 'Неправильно введен email' })
+    @IsEmail({}, { message: 'Invalid email' })
     email: string;
 
-    @IsString({ message: 'Неправильно введен пароль' })
+    @IsString({ message: 'Invalid password' })
     password: string;
 }
