@@ -1,6 +1,6 @@
-import { IsString } from 'class-validator';
+import { IsUrl } from 'class-validator';
 
 export default class RssCreateDto {
-    @IsString({ message: 'Invalid link type' })
+    @IsUrl({ message: 'Invalid link type' })
     link: string;
 }
