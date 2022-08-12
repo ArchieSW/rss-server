@@ -20,8 +20,8 @@ jobs:
         run: |
           npm run lint
       - name: Migration
-      - run: |
+        run: |
           npm run migrate
       - name: e2e test
-      - run: |
+        run: |
           npm run test
