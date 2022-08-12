@@ -16,7 +16,10 @@ beforeAll(async () => {
     };
     const res = await request(app.app).post('/users/register').send(registerDto);
     const jwt = res.body.jwt;
-    const rssRes = await request(app.app).post('/rss/create').send({ link: 'https://link.ru' });
+    const rssRes = await request(app.app)
+        .post('/rss/create')
+        .set('Authorization', `Bearer ${jwt}`)
+        .send({ link: 'https://link.ru' });
 });
 
 describe('/users tests', () => {
