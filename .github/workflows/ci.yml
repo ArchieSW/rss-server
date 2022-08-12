@@ -21,9 +21,9 @@ jobs:
           npm run lint
       - name: Migration
         env: 
-          SALT: ${{ .env.SALT }}
-          SECRET: ${{ .env.SECRET }}
-          DATABASE_URL: ${{ .env.DATABASE_URL }}
+          SALT: ${{ secrets.SALT }}
+          SECRET: ${{ secrets.SECRET }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
           npm run migrate
       - name: e2e test
