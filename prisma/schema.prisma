@@ -16,3 +16,9 @@ model UserModel {
     password    String
     name        String
 }
+
+model RssModel {
+    id        Int       @id @default(autoincrement())
+    userId    Int
+    link      String
+}

@@ -13,6 +13,10 @@ import IUserService from './users/users.service.interface';
 import UsersController from './users/users.controller';
 import IUsersRepository from './users/users.repository.interface';
 import UsersRepository from './users/users.repository';
+import IRssRepository from './rss/rss.repository.interface';
+import RssRepository from './rss/rss.repository';
+import IRssService from './rss/rss.service.interface';
+import RssService from './rss/rss.service';
 
 interface IBootstrapReturn {
     appContainer: Container;
@@ -28,6 +32,8 @@ const bindings = new ContainerModule((bind: interfaces.Bind) => {
     bind<IConfigService>(TYPES.IConfigService).to(ConfigService).inSingletonScope();
     bind<PrismaService>(TYPES.PrismaService).to(PrismaService).inSingletonScope();
     bind<IUsersRepository>(TYPES.IUsersRepository).to(UsersRepository).inSingletonScope();
+    bind<IRssRepository>(TYPES.IRssRepository).to(RssRepository).inSingletonScope();
+    bind<IRssService>(TYPES.IRssService).to(RssService).inSingletonScope();
 });
 
 function bootstrap(): IBootstrapReturn {
