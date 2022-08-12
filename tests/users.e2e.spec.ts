@@ -8,6 +8,15 @@ let app: App;
 beforeAll(async () => {
     const bootstrap = await boot;
     app = bootstrap.app;
+
+    const registerDto: UserRegisterDto = {
+        email: 'mail@mail.ru',
+        name: 'testName',
+        password: '123321',
+    };
+    const res = await request(app.app).post('/users/register').send(registerDto);
+    const jwt = res.body.jwt;
+    const rssRes = await request(app.app).post('/rss/create').send({ link: 'https://link.ru' });
 });
 
 describe('/users tests', () => {
