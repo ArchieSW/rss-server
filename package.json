@@ -7,7 +7,7 @@
     "build": "tsc",
     "migrate": "prisma migrate dev --name init",
     "generate": "prisma generate",
-    "start": "node ./dist/main.js",
+    "start": "node ./dist/src/main.js",
     "test": "jest --config jest.config.ts --coverage --runInBand",
     "lint": "eslint ./src/**",
     "lint:fix": "eslint ./src/** --fix",
