@@ -20,7 +20,7 @@ jobs:
         run: |
           npm run lint
       - name: Migration
-        environments: .env
+        environment: .env
           # SALT: ${{ secrets.SALT }}
           # SECRET: ${{ secrets.SECRET }}
           # DATABASE_URL: ${{ secrets.DATABASE_URL }}
