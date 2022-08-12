@@ -23,7 +23,7 @@ jobs:
         env:
           SALT: ${{ secrets.SALT }}
           SECRET: ${{ secrets.SECRET }}
-          DATABASE_URL: ${{ secrests.DATABASE_URL }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
           npm run migrate
       - name: e2e test
