@@ -18,7 +18,8 @@ beforeAll(async () => {
     };
 
     const regRes = await request(app.app).post('/users/register').send(registerDto);
-    const jwt = regRes.body.jwt;
+    const logRes = await request(app.app).post('/users/login').send(registerDto);
+    const jwt = logRes.body.jwt;
     const rssRes = await request(app.app)
         .post('/rss/create')
         .set('Authorization', `Bearer ${jwt}`)
