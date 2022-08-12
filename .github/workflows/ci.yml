@@ -27,5 +27,9 @@ jobs:
         run: |
           npm run migrate
       - name: e2e test
+        env: 
+          SALT: 5
+          SECRET: "no-secrets"
+          DATABASE_URL: "file:./dev.db"
         run: |
           npm run test
