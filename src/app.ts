@@ -10,7 +10,6 @@ import { json } from 'body-parser';
 import PrismaService from './database/prisma.service';
 import AuthMiddleware from './common/auth.middleware';
 import ConfigService from './config/config.service';
-import IRssController from './rss/rss.controller.interface';
 import RssController from './rss/rss.controller';
 
 @injectable()

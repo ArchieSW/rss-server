@@ -28,7 +28,7 @@ beforeAll(async () => {
 
 describe('/rss tests', () => {
     it('should not send rss without login', async () => {
-        const res = await request(app.app).get('/rss/get');
+        const res = await request(app.app).get('/rss/');
         expect(res.statusCode).toBe(401);
     });
 
@@ -41,7 +41,7 @@ describe('/rss tests', () => {
         const loginRes = await request(app.app).post('/users/login').send(loginDto);
         expect(loginRes.statusCode).toBe(200);
         const jwt = loginRes.body.jwt;
-        const rssRes = await request(app.app).get('/rss/get').set('Authorization', `Bearer ${jwt}`);
+        const rssRes = await request(app.app).get('/rss/').set('Authorization', `Bearer ${jwt}`);
         expect(rssRes.statusCode).toBe(204);
     });
 
@@ -53,7 +53,7 @@ describe('/rss tests', () => {
         const loginRes = await request(app.app).post('/users/login').send(loginDto);
         expect(loginRes.statusCode).toBe(200);
         const jwt = loginRes.body.jwt;
-        const rssRes = await request(app.app).get('/rss/get').set('Authorization', `Bearer ${jwt}`);
+        const rssRes = await request(app.app).get('/rss/').set('Authorization', `Bearer ${jwt}`);
         expect(rssRes.statusCode).toBe(200);
     });
 

@@ -7,7 +7,7 @@ import HttpError from '../errors/http-error.class';
 export default class ValidateMiddleware implements IMiddleware {
     constructor(private classToValidate: ClassConstructor<object>) {}
 
-    public execute({ body }: Request, res: Response, next: NextFunction): void {
+    public execute({ body }: Request, _: Response, next: NextFunction): void {
         const instance = plainToClass(this.classToValidate, body);
         validate(instance).then((errors) => {
             if (errors.length > 0) {
