@@ -22,7 +22,7 @@ export default class RssController extends BaseController implements IRssControl
         this.loggerService.log('RssController was instantiated');
         this.bindRoutes([
             {
-                path: '/get',
+                path: '/',
                 func: this.get,
                 method: 'get',
                 middlewares: [new AuthGuard()],

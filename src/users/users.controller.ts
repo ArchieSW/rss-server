@@ -9,8 +9,6 @@ import UserLoginDto from './dto/user-login.dto';
 import UserRegisterDto from './dto/user-register.dto';
 import ValidateMiddleware from '../validator/validator.middleware';
 import IUserService from './users.service.interface';
-import { sign } from 'jsonwebtoken';
-import { promisify } from 'util';
 import AuthGuard from '../common/auth.guard';
 
 @injectable()

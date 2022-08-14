@@ -5,18 +5,6 @@ export default class User {
     private readonly _email: string;
     private _password: string;
 
-    public get name(): string {
-        return this._name;
-    }
-
-    public get email(): string {
-        return this._email;
-    }
-
-    public get password(): string {
-        return this._password;
-    }
-
     constructor(name: string, email: string, password?: string) {
         this._name = name;
         this._email = email;
@@ -31,5 +19,17 @@ export default class User {
 
     public async comparePassword(password: string): Promise<boolean> {
         return compare(password, this.password);
+    }
+
+    public get name(): string {
+        return this._name;
+    }
+
+    public get email(): string {
+        return this._email;
+    }
+
+    public get password(): string {
+        return this._password;
     }
 }
