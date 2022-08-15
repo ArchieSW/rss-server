@@ -1,0 +1,197 @@
+openapi: "3.0.2"
+info:
+  title: "RSS-Server"
+  description: "This is simple REST API for CRUD requests with rss links."
+  version: "1.0.0"
+  contact:
+    name: "Dmitry Kutuzov"
+    email: "archie-defis-woc@ya.ru"
+
+paths:
+  /user/register:
+    post:
+      summary: 'Register new user'
+      description: 'Register new user and return UserModel'
+      requestBody:
+        description: 'User registration body'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegisterDto'
+      responses:
+        '200':
+          description: "User successfully registered"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  email: 
+                    type: string
+                  id: 
+                    type: number
+                example:
+                  id: 1
+                  email: "hahaha@ya.ru"
+                
+        '400':
+          description: 'Validation error: invalid input request'
+          # content:
+          #   application/json:
+          #     schema:
+          #       $ref: '#/components/schemas/HttpErrorResponse'
+        '422':
+          description: 'User already exists'
+          # content:
+          #   application/json:
+          #     schema:
+          #       $ref: '#/components/schemas/HttpErrorResponse'
+  /user/login:
+    post:
+      summary: 'Identificates user'
+      description: 'Authorizates user by password'
+      requestBody:
+        description: 'User login body'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLoginDto'
+      responses:
+        '200':
+          description: 'Succesfully authorized'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jwt:
+                    type: string
+        '400':
+          description: 'Validation error: invalid input request'
+        '401':
+          description: 'Authorization failed'
+  /user/info:
+    get:
+      summary: 'Gets user information'
+      description: 'Gets user informaion only for authorized user'
+      security:
+        - bearerAuth: []
+
+      responses:
+        '200':
+          description: 'Succesfully gets user information'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: number
+                  email:
+                    type: string
+                  name:
+                    type: string
+        '404':
+          description: 'User not found'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+  /rss/:
+    get:
+      summary: 'Gets user links'
+      description: 'Gets user rss links'
+      security:
+        - bearerAuth: []
+      
+      responses:
+        '200':
+          $ref: '#/components/responses/RssLinks'
+        '204':
+          description: 'User have no content'
+        '404':
+          description: 'User not found'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+
+  /rss/create:
+    post:
+      summary: 'Create one rss link'
+      security:
+        - bearerAuth: []
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                link:
+                  type: string
+
+      responses:
+        '201':
+          $ref: '#/components/responses/RssCreate'
+        '404':
+          description: 'User not found'
+        '503':
+          description: 'Server unavailable'
+        '401':
+          description: 'Access token is missing or invalid'
+    
+          
+          
+components:
+  schemas:
+    UserRegisterDto:
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        name:
+          type: string
+    UserLoginDto:
+      properties:
+          email:
+            type: string
+          password:
+            type: string
+  
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      
+  responses:
+    UnauthorizedError:
+      description: 'Access token is missing or invalid'
+    
+    RssLinks:
+      description: 'Gets users rss links'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              links:
+                type: array
+                items:
+                  type: string
+    
+    RssCreate:
+      description: 'Successfully created link'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              link: 
+                type: string
+    
+    # HttpErrorResponse:
+    #   type: object
+    #   properties:
+    #     err:
+    #       type: string

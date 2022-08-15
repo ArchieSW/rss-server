@@ -47,7 +47,7 @@ export default class App {
     }
 
     public useRoutes(): void {
-        this._app.use('/users', this.userController.router);
+        this._app.use('/user', this.userController.router);
         this._app.use('/rss', this.rssController.router);
     }
 
