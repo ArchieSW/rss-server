@@ -11,10 +11,11 @@
     "test": "jest --config jest.config.ts --coverage --runInBand",
     "lint": "eslint ./src/**",
     "lint:fix": "eslint ./src/** --fix",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "docs:md": "swagger-markdown -i swagger.yml"
   },
   "author": "",
-  "license": "ISC",
+  "license": "GPL3",
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/body-parser": "^1.19.2",

@@ -144,3 +144,8 @@ npm run build
 npm run start
 ```
 And server will start at `8000` port
+
+## OpenAPI specification:
+```bash
+npm run docs:md
+```
