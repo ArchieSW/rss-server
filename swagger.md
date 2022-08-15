@@ -133,14 +133,3 @@ Create one rss link
 | ---- | ---- | ----------- | -------- |
 | email | string |  | No |
 | password | string |  | No |
-Is a server for rss agregator
-
-## Start using:
-```bash
-npm install
-npm run migrate
-npm run generate
-npm run build
-npm run start
-```
-And server will start at `8000` port
