@@ -11,10 +11,11 @@
     "test": "jest --config jest.config.ts --coverage --runInBand",
     "lint": "eslint ./src/**",
     "lint:fix": "eslint ./src/** --fix",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "docs:md": "swagger-markdown -i swagger.yml"
   },
   "author": "",
-  "license": "ISC",
+  "license": "GPL3",
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/body-parser": "^1.19.2",
@@ -33,6 +34,7 @@
     "prettier": "^2.7.1",
     "prisma": "^4.1.1",
     "supertest": "^6.2.4",
+    "swagger-markdown": "^1.4.6",
     "ts-jest": "^28.0.7",
     "ts-node": "^10.9.1",
     "typescript": "^4.7.4"
