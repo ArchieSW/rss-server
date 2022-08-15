@@ -17,8 +17,8 @@ beforeAll(async () => {
         name: 'lol',
     };
 
-    const regRes = await request(app.app).post('/users/register').send(registerDto);
-    const logRes = await request(app.app).post('/users/login').send(registerDto);
+    const regRes = await request(app.app).post('/user/register').send(registerDto);
+    const logRes = await request(app.app).post('/user/login').send(registerDto);
     const jwt = logRes.body.jwt;
     const rssRes = await request(app.app)
         .post('/rss/create')
@@ -38,7 +38,7 @@ describe('/rss tests', () => {
             name: 'testName',
             password: '123321',
         };
-        const loginRes = await request(app.app).post('/users/login').send(loginDto);
+        const loginRes = await request(app.app).post('/user/login').send(loginDto);
         expect(loginRes.statusCode).toBe(200);
         const jwt = loginRes.body.jwt;
         const rssRes = await request(app.app).get('/rss/').set('Authorization', `Bearer ${jwt}`);
@@ -50,7 +50,7 @@ describe('/rss tests', () => {
             email: 'haha@a.ru',
             password: '123321',
         };
-        const loginRes = await request(app.app).post('/users/login').send(loginDto);
+        const loginRes = await request(app.app).post('/user/login').send(loginDto);
         expect(loginRes.statusCode).toBe(200);
         const jwt = loginRes.body.jwt;
         const rssRes = await request(app.app).get('/rss/').set('Authorization', `Bearer ${jwt}`);
@@ -73,7 +73,7 @@ describe('/rss tests', () => {
         const rss: RssCreateDto = {
             link: 'https://link.ru',
         };
-        const loginRes = await request(app.app).post('/users/login').send(loginDto);
+        const loginRes = await request(app.app).post('/user/login').send(loginDto);
         expect(loginRes.statusCode).toBe(200);
         const jwt = loginRes.body.jwt;
         const rssRes = await request(app.app)

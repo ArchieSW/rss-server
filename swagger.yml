@@ -8,7 +8,7 @@ info:
     email: "archie-defis-woc@ya.ru"
 
 paths:
-  /users/register:
+  /user/register:
     post:
       summary: 'Register new user'
       description: 'Register new user and return UserModel'
@@ -47,7 +47,7 @@ paths:
           #   application/json:
           #     schema:
           #       $ref: '#/components/schemas/HttpErrorResponse'
-  /users/login:
+  /user/login:
     post:
       summary: 'Identificates user'
       description: 'Authorizates user by password'
@@ -72,23 +72,13 @@ paths:
           description: 'Validation error: invalid input request'
         '401':
           description: 'Authorization failed'
-  /users/info:
-    post:
+  /user/info:
+    get:
       summary: 'Gets user information'
       description: 'Gets user informaion only for authorized user'
       security:
         - bearerAuth: []
-          
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                user:
-                  type: string
-              example:
-                user: 'hahaha@ya.ru'
+
       responses:
         '200':
           description: 'Succesfully gets user information'
@@ -104,7 +94,52 @@ paths:
                   name:
                     type: string
         '404':
+          description: 'User not found'
+        '401':
           $ref: '#/components/responses/UnauthorizedError'
+  /rss/:
+    get:
+      summary: 'Gets user links'
+      description: 'Gets user rss links'
+      security:
+        - bearerAuth: []
+      
+      responses:
+        '200':
+          $ref: '#/components/responses/RssLinks'
+        '204':
+          description: 'User have no content'
+        '404':
+          description: 'User not found'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+
+  /rss/create:
+    post:
+      summary: 'Create one rss link'
+      security:
+        - bearerAuth: []
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                link:
+                  type: string
+
+      responses:
+        '201':
+          $ref: '#/components/responses/RssCreate'
+        '404':
+          description: 'User not found'
+        '503':
+          description: 'Server unavailable'
+        '401':
+          description: 'Access token is missing or invalid'
+    
+          
           
 components:
   schemas:
@@ -132,7 +167,29 @@ components:
   responses:
     UnauthorizedError:
       description: 'Access token is missing or invalid'
-      
+    
+    RssLinks:
+      description: 'Gets users rss links'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              links:
+                type: array
+                items:
+                  type: string
+    
+    RssCreate:
+      description: 'Successfully created link'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              link: 
+                type: string
+    
     # HttpErrorResponse:
     #   type: object
     #   properties:

@@ -14,7 +14,7 @@ beforeAll(async () => {
         name: 'testName',
         password: '123321',
     };
-    const res = await request(app.app).post('/users/register').send(registerDto);
+    const res = await request(app.app).post('/user/register').send(registerDto);
     const jwt = res.body.jwt;
     const rssRes = await request(app.app)
         .post('/rss/create')
@@ -22,9 +22,9 @@ beforeAll(async () => {
         .send({ link: 'https://link.ru' });
 });
 
-describe('/users tests', () => {
+describe('/user tests', () => {
     it('should not send /info without login', async () => {
-        const res = await request(app.app).get('/users/info').send();
+        const res = await request(app.app).get('/user/info').send();
         expect(res.statusCode).toBe(401);
     });
 
@@ -34,7 +34,7 @@ describe('/users tests', () => {
             name: 'Ya',
             password: '1',
         };
-        const res = await request(app.app).post('/users/register').send(registerDto);
+        const res = await request(app.app).post('/user/register').send(registerDto);
         expect(res.statusCode).toBe(400);
     });
 
@@ -44,7 +44,7 @@ describe('/users tests', () => {
             name: 100,
             password: '1',
         };
-        const res = await request(app.app).post('/users/register').send(registerDto);
+        const res = await request(app.app).post('/user/register').send(registerDto);
         expect(res.statusCode).toBe(400);
     });
 
@@ -54,7 +54,7 @@ describe('/users tests', () => {
             name: '100',
             password: 100,
         };
-        const res = await request(app.app).post('/users/register').send(registerDto);
+        const res = await request(app.app).post('/user/register').send(registerDto);
         expect(res.statusCode).toBe(400);
     });
 
@@ -65,7 +65,7 @@ describe('/users tests', () => {
             name: 'testName',
             password: '123321',
         };
-        const res = await request(app.app).post('/users/register').send(registerDto);
+        const res = await request(app.app).post('/user/register').send(registerDto);
         expect(res.statusCode).toBe(200);
     });
 
@@ -75,7 +75,7 @@ describe('/users tests', () => {
             name: 'testName',
             password: '123321',
         };
-        const res = await request(app.app).post('/users/register').send(registerDto);
+        const res = await request(app.app).post('/user/register').send(registerDto);
         expect(res.statusCode).toBe(422);
     });
 
@@ -85,7 +85,7 @@ describe('/users tests', () => {
             name: 'testName',
             password: '12332',
         };
-        const res = await request(app.app).post('/users/login').send(loginDto);
+        const res = await request(app.app).post('/user/login').send(loginDto);
         expect(res.statusCode).toBe(401);
     });
 
@@ -95,7 +95,7 @@ describe('/users tests', () => {
             name: 'testName',
             password: '123321',
         };
-        const res = await request(app.app).post('/users/login').send(loginDto);
+        const res = await request(app.app).post('/user/login').send(loginDto);
         expect(res.statusCode).toBe(200);
     });
 
@@ -105,11 +105,9 @@ describe('/users tests', () => {
             name: 'testName',
             password: '123321',
         };
-        const res = await request(app.app).post('/users/login').send(loginDto);
+        const res = await request(app.app).post('/user/login').send(loginDto);
         const jwt = res.body.jwt;
-        const res2 = await request(app.app)
-            .get('/users/info')
-            .set('Authorization', `Bearer ${jwt}`);
+        const res2 = await request(app.app).get('/user/info').set('Authorization', `Bearer ${jwt}`);
         expect(res2.body.email).toBe(loginDto.email);
         expect(res2.body.name).toBe(loginDto.name);
     });
